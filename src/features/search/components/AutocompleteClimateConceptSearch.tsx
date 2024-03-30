@@ -81,6 +81,7 @@ function AutocompleteClimateConceptSearch(
         onChange(newFilteredOptions);
       }
     } else {
+      highlightNodes([]);
       setShowOptions(false);
     }
   }, [inputValue]);
