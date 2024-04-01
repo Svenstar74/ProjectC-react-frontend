@@ -1,4 +1,4 @@
-import { ISource, TConnectionType } from "business-logic";
+import { TConnectionType } from "business-logic";
 import { useAppSelector } from "../../store/redux/hooks";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -69,7 +69,7 @@ function useApiClient() {
     });
   }
 
-  async function createConnection(sourceId: string, targetId: string, type: TConnectionType, sources?: ISource[]) {
+  async function createConnection(sourceId: string, targetId: string, type: TConnectionType, sources?: { url: string; originalText: string }[]) {
     const response = await fetch(BASE_URL + '/connections', {
       method: 'POST',
       headers: {
@@ -95,26 +95,6 @@ function useApiClient() {
   async function deleteConnection(id: string) {
     await fetch(BASE_URL + `/connections/${id}`, {
       method: 'DELETE',
-    });
-  }
-
-  async function addSource(id: string, url: string, originalText: string, endpoint: '/climate-concept-nodes' | '/connections') {
-    await fetch(BASE_URL + `${endpoint}/${id}/sources`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ url, originalText }),
-    });
-  }
-
-  async function deleteSource(id: string, url: string, originalText: string, endpoint: '/climate-concept-nodes' | '/connections') {
-    await fetch(BASE_URL + `${endpoint}/${id}/sources`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ url, originalText }),
     });
   }
 
@@ -163,8 +143,6 @@ function useApiClient() {
     updateConnectionType,
     deleteConnection,
 
-    addSource,
-    deleteSource,
     updateNeedsReviewLabel,
     updateNeedsCorrectionLabel,
     updateIsReviewedLabel,

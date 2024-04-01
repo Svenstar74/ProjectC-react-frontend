@@ -1,16 +1,15 @@
+import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import { Button, DialogActions, DialogContent, DialogContentText } from "@mui/material";
-import { NewSource, Source } from "../../detail-pages/components/sources";
-import { useState } from "react";
-import { ISource } from "business-logic";
+import { NewSource, Source } from "src/features/sources";
 
 interface Props {
   onBack: () => void;
-  onCreateNode: (sources: ISource[]) => void;
+  onCreateNode: (sources: { url: string; originalText: string; }[]) => void;
 }
 
 function SourceStepperContent({ onBack, onCreateNode }: Props) {
-  const [sources, setSources] = useState<ISource[]>([]);
+  const [sources, setSources] = useState<{ url: string; originalText: string; }[]>([]);
 
   return (
     <>

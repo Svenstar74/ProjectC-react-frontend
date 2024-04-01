@@ -6,7 +6,7 @@ import { useSigma } from '@react-sigma/core';
 import { IClimateConceptNode } from "business-logic";
 
 import EditStringRepresentationDialog from "./EditStringRepresentationDialog";
-import { Sources } from "./sources";
+import { Sources } from "src/features/sources";
 import ConfirmDialog from "../../../components/dialogs/ConfirmDialog";
 import ReviewCorrectionChips from "./ReviewCorrectionChips";
 import useApiClient from "../../../components/hooks/useApiClient";
@@ -157,7 +157,7 @@ function ClimateConceptNodeDetails({ climateConceptId }: Props) {
 
             <CommentAccordion referenceId={climateConceptId} userIsAuthorized={isLoggedIn} userName={userName} />
 
-            <Sources endpoint='/climate-concept-nodes' id={climateConceptId} sources={climateConceptNode.sources} />
+            <Sources referenceId={climateConceptId} />
           </CardContent>
         </Collapse>
       </Card>

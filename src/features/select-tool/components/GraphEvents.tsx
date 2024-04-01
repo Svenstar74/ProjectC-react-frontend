@@ -170,7 +170,6 @@ function GraphEvents() {
               needsReview: false,
               needsCorrection: false,
               isReviewed: false,
-              sources: [],
               createdAt: '',
               createdBy: '',
             });

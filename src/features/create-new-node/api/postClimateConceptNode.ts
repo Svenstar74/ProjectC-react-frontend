@@ -1,4 +1,4 @@
-import { IClimateConceptNode, ISource } from "business-logic";
+import { IClimateConceptNode } from "business-logic";
 import { IApiResponse } from "../../../services/api-service/IApiResponse";
 import { apiService } from "../../../services/api-service/ApiService";
 
@@ -6,7 +6,6 @@ export interface IPostClimateConceptNodeRequest {
   x: number;
   y: number;
   name: string;
-  sources?: ISource[];
   needsReview?: boolean;
   needsCorrection?: boolean;
   isReviewed?: boolean;

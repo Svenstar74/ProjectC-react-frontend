@@ -7,6 +7,7 @@ import NameStepperContent from './NameStepperContent';
 import SourceStepperContent from './SourceStepperContent';
 import { useCreateNode } from '../hooks';
 import { useAppSelector } from '../../../store/redux/hooks';
+import { addSource } from 'src/features/sources/api';
 
 interface Props {
   open: boolean;
@@ -17,6 +18,7 @@ interface Props {
 function CreateNodeDialog({ open, clickPosition, onClose }: Props) {
   const sigma = useSigma();
   const userName = useAppSelector((state) => state.auth.userName);
+
   const { createNode } = useCreateNode();
 
   const [activeStep, setActiveStep] = useState(0);
@@ -30,13 +32,16 @@ function CreateNodeDialog({ open, clickPosition, onClose }: Props) {
   async function createNodeHandler(sources: { url: string; originalText: string }[]) {
     const nodePosition = sigma.viewportToGraph(clickPosition)
 
-    await createNode({
+    const { data } = await createNode({
       x: nodePosition.x,
       y: nodePosition.y,
       name,
-      sources,
       createdBy: userName,
     })
+
+    sources.forEach(async (source) => {
+      addSource(data.id, source.url, source.originalText, userName);
+    });
 
     onClose();
   }

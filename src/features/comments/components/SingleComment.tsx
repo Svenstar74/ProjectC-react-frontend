@@ -20,8 +20,7 @@ function SingleComment({ referenceId, id, text, createdBy, createdAt, userIsAuth
 
   const showToolbar = userIsAuthorized && hovered && !editing;
   const paragraphs = text.split('\n');
-console.log(text)
-console.log(paragraphs)
+
   return (
     <div
       onMouseEnter={() => setHovered(true)}

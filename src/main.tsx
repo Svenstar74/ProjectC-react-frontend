@@ -28,12 +28,19 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const queryClient = new QueryClient()
+const maintanance = false;
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </QueryClientProvider>,
-)
+  <>
+    {!maintanance && <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </QueryClientProvider>}
+
+    {maintanance && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <h2 style={{ textAlign: 'center' }}>Scheduled maintanance for about 15 minutes</h2>
+    </div>}
+  </>,
+);

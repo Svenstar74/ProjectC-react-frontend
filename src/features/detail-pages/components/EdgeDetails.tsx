@@ -4,7 +4,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useSigma } from '@react-sigma/core';
 
 import EditStringRepresentationDialog from './EditStringRepresentationDialog';
-import { Sources } from './sources';
+import { Sources } from 'src/features/sources';
 import ConfirmDialog from '../../../components/dialogs/ConfirmDialog';
 import ReviewCorrectionChips from './ReviewCorrectionChips';
 import useApiClient from '../../../components/hooks/useApiClient';
@@ -247,7 +247,7 @@ function EdgeDetails({ edgeId }: Props) {
 
             <CommentAccordion referenceId={edgeId} userIsAuthorized={isLoggedIn} userName={userName} />
 
-            <Sources id={edgeId} endpoint='/connections' sources={connection.sources} />
+            <Sources referenceId={edgeId} />
               
           </CardContent>
         </Collapse>

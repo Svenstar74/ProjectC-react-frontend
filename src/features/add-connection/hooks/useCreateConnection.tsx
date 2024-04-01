@@ -1,6 +1,6 @@
 import { useSigma } from "@react-sigma/core";
 
-import { ISource, TConnectionType } from "business-logic";
+import { TConnectionType } from "business-logic";
 import useApiClient from "../../../components/hooks/useApiClient";
 
 function useCreateConnection() {
@@ -11,7 +11,7 @@ function useCreateConnection() {
     sourceId: string,
     targetId: string,
     connectionType: TConnectionType,
-    sources?: ISource[],
+    sources?: { url: string; originalText: string; }[],
   ): Promise<boolean> {
     const connection = await apiClient.createConnection(
       sourceId, targetId, connectionType, sources

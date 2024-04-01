@@ -7,7 +7,6 @@ function TestButton() {
     throw new Error('Test error - ' + process.env.NODE_ENV);
   }
 
-  console.log(userName)
   if (userName !== 'admin-Sven Firmbach') {
     return null;
   }

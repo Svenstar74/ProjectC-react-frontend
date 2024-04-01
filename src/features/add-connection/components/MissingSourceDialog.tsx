@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import { ISource } from "business-logic";
+import { LoadingButton } from "@mui/lab";
 
 import { eventBus } from "../../../eventBus";
 import useCreateConnection from "../hooks/useCreateConnection";
-import { NewSource, Source } from "../../detail-pages/components/sources";
-import { LoadingButton } from "@mui/lab";
+import { NewSource, Source } from "src/features/sources";
 
 function MissingSourceDialog() {
   const { createConnection } = useCreateConnection();
@@ -15,7 +14,7 @@ function MissingSourceDialog() {
   const [targetId, setTargetId] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [sources, setSources] = useState<ISource[]>([]);
+  const [sources, setSources] = useState<{ url: string; originalText: string; }[]>([]);
 
   async function handleCreateConnection() {
     setIsLoading(true);

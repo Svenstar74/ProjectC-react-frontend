@@ -3,18 +3,14 @@ import { IconButton, TextField, Tooltip } from '@mui/material';
 import { ContentCopy, Delete, Launch } from '@mui/icons-material';
 
 import { useToastMessage } from 'src/shared';
-import ConfirmDialog from '../../../../components/dialogs/ConfirmDialog';
-import { useAppSelector } from '../../../../store/redux/hooks';
+import ConfirmDialog from 'src/components/dialogs/ConfirmDialog';
+import { useAppSelector } from 'src/store/redux/hooks';
 
 interface Props {
   id: string;
   url: string;
   originalText: string;
-  onDeleteSource: (
-    id: string,
-    url: string,
-    originalText: string
-  ) => void;
+  onDeleteSource: (id: string) => void;
 }
 
 function Source({ id, url, originalText, onDeleteSource }: Props) {
@@ -25,7 +21,7 @@ function Source({ id, url, originalText, onDeleteSource }: Props) {
 
   function confirmDeleteSource() {
     setShowConfirmDialog(false);
-    onDeleteSource(id, url, originalText)
+    onDeleteSource(id)
   }
 
   function copySource() {
