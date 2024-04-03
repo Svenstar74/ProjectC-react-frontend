@@ -2,7 +2,7 @@ import { distance } from "fastest-levenshtein";
 
 function useClimateConceptSearch() {
   function searchClimateConcepts(query: string, climateConcepts: string[]): string[] {
-    const normalizedQuery = query.toLowerCase();
+    const normalizedQuery = query.toLowerCase().replace(/[\[\]']/g, "");
     const tokenizedQuery = normalizedQuery.split(/[\s_]+/);
 
     return climateConcepts.filter((name) => {
