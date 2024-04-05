@@ -33,8 +33,8 @@ function ShowIsolatedNodesButton() {
         }
       });
 
-      sigma.getGraph().forEachNode((node) => {
-        const pathsToNode = allSimplePaths(sigma.getGraph(), gasEmissionsNodeId, node);
+      graph.forEachNode((node) => {
+        const pathsToNode = allSimplePaths(graph, gasEmissionsNodeId, node);
         paths.set(node, pathsToNode);
       });
 
