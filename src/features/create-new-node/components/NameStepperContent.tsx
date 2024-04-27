@@ -32,7 +32,7 @@ function NameStepperContent({ onClose, onNameChosen }: Props) {
 
   function showNodeHandler() {
     onClose();
-    centerNodeByName(data.data.similarName.name);
+    centerNodeByName(data.data.similarNames[0].name);
   }
 
   useEffect(() => {
@@ -113,7 +113,7 @@ function NameStepperContent({ onClose, onNameChosen }: Props) {
           </Alert>
         </Collapse>
 
-        <Collapse in={data ? !data.data.exists && data.data.similarName.similarity > 0.7 : false}>
+        <Collapse in={data ? !data.data.exists && data.data.similarNames[0].similarity > 0.7 : false}>
           <Alert
             severity='info'
             style={{ marginTop: 20 }}
@@ -124,7 +124,7 @@ function NameStepperContent({ onClose, onNameChosen }: Props) {
             }
           >
             A node with a very similar name exists: <br />
-            Name: {data?.data.similarName.name} <br />
+            Name: {data?.data.similarNames[0].name} <br />
             {/* Similarity: {data?.data.similarName.similarity * 100}% <br /> */}
           </Alert>
         </Collapse>

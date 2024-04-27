@@ -3,7 +3,6 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 async function addComment(referenceId: string, text: string, createdBy: string) {
   // Current time in UTC
   const createdAt = new Date().toISOString();
-  console.log(createdAt)
 
   const response = await fetch(BASE_URL + '/comments', {
     method: 'POST',

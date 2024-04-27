@@ -9,25 +9,25 @@ function useApiClient() {
   async function getAllClimateConceptNodes() {
     const response = await fetch(BASE_URL + '/climate-concept-nodes');
     const data = await response.json();
-    return data.data;
+    return data.data.nodes;
   }
 
   async function getClimateConceptNode(id: string) {
     const response = await fetch(BASE_URL + `/climate-concept-nodes/${id}`);
     const data = await response.json();
-    return data.data;
+    return data.data.node;
   }
 
   async function getAllConnections() {
     const response = await fetch(BASE_URL + '/connections');
     const data = await response.json();
-    return data.data;
+    return data.data.connections;
   }
 
   async function getConnection(id: string) {
     const response = await fetch(BASE_URL + `/connections/${id}`);
     const data = await response.json();
-    return data.data;
+    return data.data.connection;
   }
 
   async function createClimateConceptNode(name: string, x: number, y: number) {

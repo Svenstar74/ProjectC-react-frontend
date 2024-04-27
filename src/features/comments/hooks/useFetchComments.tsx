@@ -5,6 +5,7 @@ function useFetchComments(referenceId: string) {
   return useQuery({
     queryKey: ['comments', referenceId],
     queryFn: () => fetchComments(referenceId),
+    enabled: !!referenceId,
   });
 }
 

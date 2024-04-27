@@ -24,7 +24,6 @@ function useAddComment(referenceId: string) {
 
       // Optimistically update to the new value
       queryClient.setQueryData(['comments', referenceId], (old: comments.CommentEntity[] | undefined) => {
-        console.log(newComment)
         if (old) {
           return [{id: Math.random().toString().slice(2), ...newComment}, ...old];
         }

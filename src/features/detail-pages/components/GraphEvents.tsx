@@ -63,7 +63,7 @@ function GraphEvents() {
         sigma.getGraph().setEdgeAttribute(e.edge, 'color', '#000');
       },
       downNode(e) {
-        if (isNaN(+e.node)) return;
+        // if (isNaN(+e.node)) return;
         
         if (selectedType === 'node' && selectedId) {
           sigma.getGraph().setNodeAttribute(selectedId, 'highlighted', false);

@@ -7,10 +7,10 @@ export interface IMostSimilarNameRequest {
 
 export interface IMostSimilarNameResponse {
   exists: boolean;
-  similarName: {
+  similarNames: {
     name: string;
     similarity: number;
-  };
+  }[];
 }
 
 export async function postFindMostSimilarName(data: IMostSimilarNameRequest): Promise<IApiResponse<IMostSimilarNameResponse>> {

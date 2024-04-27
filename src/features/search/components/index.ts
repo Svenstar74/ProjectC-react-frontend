@@ -1,1 +1,1 @@
-export { default as AutocompleteClimateConceptSearch } from './AutocompleteClimateConceptSearch';
+export { default as ConnectedClimateConceptSearch } from './ConnectedClimateConceptSearch';
