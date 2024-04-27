@@ -247,7 +247,7 @@ function EdgeDetails({ edgeId }: Props) {
 
             <CommentAccordion referenceId={edgeId} userIsAuthorized={isLoggedIn} userName={userName} />
 
-            <Sources id={edgeId} endpoint='/connections' sources={connection.sources} />
+            <Sources referenceId={edgeId} />
               
           </CardContent>
         </Collapse>

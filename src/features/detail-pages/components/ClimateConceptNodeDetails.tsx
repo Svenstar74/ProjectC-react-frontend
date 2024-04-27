@@ -157,7 +157,7 @@ function ClimateConceptNodeDetails({ climateConceptId }: Props) {
 
             <CommentAccordion referenceId={climateConceptId} userIsAuthorized={isLoggedIn} userName={userName} />
 
-            <Sources endpoint='/climate-concept-nodes' id={climateConceptId} sources={climateConceptNode.sources} />
+            <Sources referenceId={climateConceptId} />
           </CardContent>
         </Collapse>
       </Card>

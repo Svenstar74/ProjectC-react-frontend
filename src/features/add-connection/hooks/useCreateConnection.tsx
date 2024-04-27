@@ -12,10 +12,24 @@ function useCreateConnection() {
     targetId: string,
     connectionType: TConnectionType,
     sources?: ISource[],
+    matchingSources?: any[]
   ): Promise<boolean> {
-    const connection = await apiClient.createConnection(
-      sourceId, targetId, connectionType, sources
-    );
+    const connection = await apiClient.createConnection(sourceId, targetId, connectionType);
+
+    // Add sources
+    if (sources) {
+      sources.forEach((source) => {
+        apiClient.addSource(connection.id, source.url, source.originalText);
+
+        try {
+          apiClient.addSource(sourceId, source.url, source.originalText);
+        } catch (e) {}
+
+        try {
+          apiClient.addSource(targetId, source.url, source.originalText);
+        } catch (e) {}
+      });
+    }
 
     if (connection) {
       let type = 'arrow';

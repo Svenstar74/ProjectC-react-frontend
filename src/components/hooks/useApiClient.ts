@@ -98,18 +98,28 @@ function useApiClient() {
     });
   }
 
-  async function addSource(id: string, url: string, originalText: string, endpoint: '/climate-concept-nodes' | '/connections') {
-    await fetch(BASE_URL + `${endpoint}/${id}/sources`, {
+  async function getSources(referenceId: string) {
+    const response = await fetch(BASE_URL + `/sources/reference/${referenceId}`);
+    const data = await response.json();
+    return data.data;
+  }
+
+  async function addSource(referenceId: string, url: string, originalText: string,) {
+    const response = await fetch(BASE_URL + `/sources`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ url, originalText }),
+      body: JSON.stringify({ referenceId, url, originalText, createdBy: userName }),
     });
+
+    if (!response.ok) {
+      throw new Error();
+    }
   }
 
-  async function deleteSource(id: string, url: string, originalText: string, endpoint: '/climate-concept-nodes' | '/connections') {
-    await fetch(BASE_URL + `${endpoint}/${id}/sources`, {
+  async function deleteSource(referenceId: string, url: string, originalText: string) {
+    await fetch(BASE_URL + `/sources/reference/${referenceId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -163,6 +173,7 @@ function useApiClient() {
     updateConnectionType,
     deleteConnection,
 
+    getSources,
     addSource,
     deleteSource,
     updateNeedsReviewLabel,

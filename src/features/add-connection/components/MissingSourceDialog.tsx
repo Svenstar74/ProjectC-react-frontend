@@ -13,13 +13,14 @@ function MissingSourceDialog() {
   const [open, setOpen] = useState(false);
   const [sourceId, setSourceId] = useState('');
   const [targetId, setTargetId] = useState('');
+  const [matchingSources, setMatchingSources] = useState<any[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [sources, setSources] = useState<ISource[]>([]);
 
   async function handleCreateConnection() {
     setIsLoading(true);
-    await createConnection(sourceId, targetId, 'contributesTo', sources);
+    await createConnection(sourceId, targetId, 'contributesTo', sources, matchingSources);
 
     setIsLoading(false);
     setOpen(false);
@@ -29,6 +30,7 @@ function MissingSourceDialog() {
     eventBus.on('addMissingSource', (data) => {
       setSourceId(data.startNode);
       setTargetId(data.endNode);
+      setMatchingSources(data.matchingSources);
       setOpen(true);
     });
   

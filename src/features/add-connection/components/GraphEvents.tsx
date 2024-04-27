@@ -51,13 +51,18 @@ function GraphEvents({ hoveredNode, hideQab }: Props) {
     if (connectionType === 'contributesTo') {
       matchingSources = await findMatchingSources(startNode, endNode);
       if (matchingSources.length === 0) {
-        eventBus.emit('addMissingSource', { startNode, endNode });
+        eventBus.emit('addMissingSource', { startNode, endNode, matchingSources });
         return;
       }
     }
 
     try {
-      const connection = await apiClient.createConnection(startNode, endNode, connectionType, matchingSources);
+      const connection = await apiClient.createConnection(startNode, endNode, connectionType);
+      if (connectionType === 'contributesTo') {
+        matchingSources.forEach((source) => {
+          apiClient.addSource(connection.id, source.url, source.originalText);
+        });
+      }
   
       if (connection) {
         let type = 'arrow';

@@ -9,11 +9,8 @@ function useFindMatchingSources() {
    * @param targetNodeId 
    */
   async function findMatchingSources(sourceNodeId: string, targetNodeId: string) {
-    const sourceNode = await apiClient.getClimateConceptNode(sourceNodeId);
-    const targetNode = await apiClient.getClimateConceptNode(targetNodeId);
-
-    const sourceNodeSources = sourceNode?.sources ?? [];
-    const targetNodeSources = targetNode?.sources ?? [];
+    const sourceNodeSources = await apiClient.getSources(sourceNodeId);
+    const targetNodeSources = await apiClient.getSources(targetNodeId);
 
     // Sources have a url and originalText prop that have to match
     const intersection = sourceNodeSources.filter((source) => {

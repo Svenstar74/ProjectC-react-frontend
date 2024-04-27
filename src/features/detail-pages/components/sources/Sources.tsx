@@ -9,16 +9,14 @@ import { useAppSelector } from '../../../../store/redux/hooks';
 import { captureMessage } from '@sentry/react';
 
 interface Props {
-  id: string;
-  endpoint: '/climate-concept-nodes' | '/connections';
-  sources: { url: string; originalText: string }[];
+  referenceId: string;
 }
 
-function Sources({ id, endpoint, sources }: Props) {
+function Sources({ referenceId }: Props) {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const apiClient = useApiClient();
 
-  const [sourceList, setSourceList] = useState(sources);
+  const [sourceList, setSourceList] = useState([]);
   const [showNewSource, setShowNewSource] = useState(false);
 
   function addSource(url: string, originalText: string) {
@@ -26,7 +24,7 @@ function Sources({ id, endpoint, sources }: Props) {
       return;
     }
 
-    apiClient.addSource(id, url, originalText, endpoint)
+    apiClient.addSource(referenceId, url, originalText)
       .then(() => {
         setSourceList((current) => [...current, { url, originalText }]);
       });
@@ -39,7 +37,7 @@ function Sources({ id, endpoint, sources }: Props) {
     url: string,
     originalText: string,
   ) {
-    apiClient.deleteSource(climateConceptId, url, originalText, endpoint);
+    apiClient.deleteSource(climateConceptId, url, originalText);
 
     setSourceList((current) =>
       current.filter(
@@ -49,12 +47,14 @@ function Sources({ id, endpoint, sources }: Props) {
   }
 
   if (sourceList === undefined) {
-    captureMessage('sourceList is undefined for id ' + id);
+    captureMessage('sourceList is undefined for id ' + referenceId);
   }
 
   useEffect(() => {
-    setSourceList(sources);
-  }, [sources]);
+    apiClient.getSources(referenceId)
+      .then((sources) => setSourceList(sources)
+      );
+  }, [referenceId]);
 
   return (
     <Accordion defaultExpanded>
@@ -79,7 +79,7 @@ function Sources({ id, endpoint, sources }: Props) {
           {sourceList !== undefined &&  sourceList.map((source) => (
             <Source
               key={source.url + source.originalText}
-              id={id}
+              id={referenceId}
               url={source.url}
               originalText={source.originalText}
               onDeleteSource={deleteSource}
