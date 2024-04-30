@@ -1,2 +1,1 @@
-export * from './components';
-export * from './hooks';
+export { default as ConnectedClimateConceptSearch } from './components/ConnectedClimateConceptSearch';

@@ -16,7 +16,7 @@ import { DetailPages } from '../../detail-pages';
 import { ToggleViewEdgeTypes } from '../../toggle-view-of-edge-types';
 import ResponsiveLabelSize from './ResponsiveLabelSize';
 import DoubleClickStageBehavior from './DoubleClickStageBehavior';
-import { AutocompleteClimateConceptSearch } from '../../search';
+import { ConnectedClimateConceptSearch } from '../../search';
 import { ToggleViewOfGroupedNodes } from '../../toggle-view-of-grouped-nodes';
 import { SelectTool } from '../../select-tool';
 import ShowIsolatedNodesButton from '../../show-isolated-nodes';
@@ -84,7 +84,7 @@ function DisplayGraph() {
       <DeleteEdge />
 
       <ControlsContainer position="bottom-right" style={{ border: 'none' }}>
-        <AutocompleteClimateConceptSearch />
+        <ConnectedClimateConceptSearch />
       </ControlsContainer>
 
       {/* {!isFullscreen && (
